@@ -11,8 +11,10 @@ fn App() -> impl IntoView {
 
     view! {
         <div class="grid grid-cols-3 gap-4 flex-row content-around bg-sky-500">
-            <div class="m-5">
-                {count.get()}
+            <div class="m-5"
+                 class=("text-red-600", move || count.get() % 2 == 1)
+            >
+                {move || count.get()}
             </div>
             <div class="m-5">
                  none
@@ -22,7 +24,7 @@ fn App() -> impl IntoView {
                 style="display:inline-block;"
                 on:click=move |_| {
                     // on stable, this is set_count.set(3);
-                    set_count.set(3);
+                    set_count.update(|n| *n += 1);
                 }
             >
                 "Click me: "
