@@ -12,8 +12,9 @@ fn App() -> impl IntoView {
     view! {
         <div class="grid grid-cols-3 gap-4 flex-row content-around bg-sky-500">
             <div class="m-5"
-                 class=("text-red-600", move || count.get() % 2 == 1)
-            >
+                class=("text-red-600", move || count.get() % 2 == 1)
+                style=("font-size", move || format!("{}px", count.get() + 10))
+           >
                 {move || count.get()}
             </div>
             <div class="m-5">
