@@ -8,7 +8,7 @@ fn main() {
 #[component]
 fn App() -> impl IntoView {
     let (count, set_count) = create_signal(0);
-    let double_count = move || count.get() * 2;
+    // let double_count = move || count.get() * 2;
     view! {
         <div class="grid grid-cols-3 gap-4 flex-row content-around bg-sky-500">
             <div class="m-5"
@@ -33,11 +33,20 @@ fn App() -> impl IntoView {
                 {move || count.get()}
             </button>
         </div>
+        <ProgressBar progress=count/>
+    }
+}
+
+#[component]
+fn ProgressBar(
+    #[prop(default = 100)]
+    max: u16,
+    progress: ReadSignal<i32>
+) -> impl IntoView {
+    view! {
         <progress
-            max="50%"
-            // signals are functions, so `value=count` and `value=move || count.get()`
-            // are interchangeable.
-            value= double_count
+          max=max
+          value=progress
         />
     }
 }
